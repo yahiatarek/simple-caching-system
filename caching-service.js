@@ -1,6 +1,7 @@
 const { ListNode, hashMap, DB } = require('./caching-data-structures.js');
 
 let linkedList = new ListNode(null, null, null);
+const cacheSize = 3;
 
 function getUser(userId) {
   if (hashMap.has(`userHashKey${userId}`)) {
@@ -40,7 +41,7 @@ function evictNodeFromLinkedListTail() {
   }
 
   
-  if (count > 3) {
+  if (count > cacheSize) {
     if(hashMap.has(`userHashKey${p1.value.id}`)) {
       hashMap.delete(`userHashKey${p1.value.id}`);
     }
